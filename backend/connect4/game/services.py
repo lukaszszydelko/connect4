@@ -1,5 +1,5 @@
 from .common import BOARD_SIZE, CONNECT_2_WIN
-from .models import Connect4Game
+from .models import Connect4Game, Player
 
 
 def is_save(coordinate: int):
@@ -85,7 +85,8 @@ def handle_move(game: Connect4Game, data: dict) -> bool:
 
         if check_finish_game(game, data["line"], field):
             game.game_end = True
-            game.message = f" player {game.current_player} win!"
+            players_mapping = {Player.FIRST: "1", Player.SECOND: "2"}
+            game.message = f" player {players_mapping[game.current_player]} win!"
         elif check_draw(game):
             game.game_end = True
             game.message = "Game finished with draw!"
